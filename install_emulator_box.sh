@@ -68,16 +68,24 @@ function install_ps3_controller()
     sudo rm -rf /tmp/emulator/sixad
     sudo mkdir -p /tmp/emulator/sixad/ -m 777
     git clone git://github.com/aaronp24/QtSixA.git /tmp/emulator/sixad/
+    
+    PREV_DIR=$(pwd)
     cd /tmp/emulator/sixad/
+
     make
     sudo make install
+
+    cd $PREV_DIR
+
+    # add ps3 controller specific zsnes input config
+    cp ps3_zinput.cfg ~/.zsnes/zinput.cfg
 }
 
 function main()
 {
     # package manager updates
-    #apt_update
-    #apt_upgrade
+    apt_update
+    apt_upgrade
 
     # install dependencies
     apt_package_install git
