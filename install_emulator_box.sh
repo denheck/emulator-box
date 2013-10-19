@@ -89,7 +89,13 @@ function main()
 
     # install dependencies
     apt_package_install git
+    
+    # install Super Nintendo emulator
     apt_package_install zsnes
+    # install Playstation emulator
+    apt_pacakge_install pcsxr
+    # install Nintendo 64 emulator
+    apt_package_install mupen64plus
 
     install_ps3_controller
 }
