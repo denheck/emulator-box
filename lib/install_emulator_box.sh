@@ -1,9 +1,13 @@
 #!/bin/bash
 
+######## Helper Functions ########
+
 function print_msg()
 {
     echo -e "$1..."
 }
+
+######## Debian Specific Helper Functions ########
 
 # check if package is installed via apt-get
 function apt_package_query()
@@ -21,7 +25,7 @@ function apt_package_query()
 function apt_package_install()
 {
     PKG=$1
-    
+
     apt_package_query $PKG
     if [ $? == 1 ]; then
         print_msg "package '$PKG' already installed"
@@ -32,7 +36,7 @@ function apt_package_install()
 }
 
 # update APT repositories
-function apt_update() 
+function apt_update()
 {
     print_msg "updating apt-get database"
     sudo apt-get -y update
@@ -68,7 +72,7 @@ function install_ps3_controller()
     sudo rm -rf /tmp/emulator/sixad
     sudo mkdir -p /tmp/emulator/sixad/ -m 777
     git clone git://github.com/aaronp24/QtSixA.git /tmp/emulator/sixad/
-    
+
     PREV_DIR=$(pwd)
     cd /tmp/emulator/sixad/
 
@@ -81,6 +85,8 @@ function install_ps3_controller()
     cp ps3_zinput.cfg ~/.zsnes/zinput.cfg
 }
 
+######## Main ########
+
 function main()
 {
     # package manager updates
@@ -89,7 +95,7 @@ function main()
 
     # install dependencies
     apt_package_install git
-    
+
     # install Super Nintendo emulator
     apt_package_install zsnes
     # install Playstation emulator
