@@ -8,6 +8,10 @@ class Os
     @os ||= get_os
   end
 
+  def get_name
+    @os.to_s
+  end
+
   def get_os
     host_os = RbConfig::CONFIG['host_os']
     case host_os
